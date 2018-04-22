@@ -42,51 +42,61 @@ public class MainCodeArea {
             twoD[i][j] = 0;
          }
       }
-      //printArrays(twoD,rowS1,colS2);
       int addThis = 0;
       int rowDec =0;
       int colDec =0;
       int max = 0;
       String sOne ="";
       String sTwo ="";
-      String output ="";
-      output += "\nrowS1.length: "+rowS1.length+" colS2.length: "+colS2.length+" \n\n";
       for (int row = 1; row <= rowS1.length ; row++ ) { 
-		 for (int col = 1; col <= colS2.length ; col++ ) {
-		 	// if((col-1) < colS2.length)
-		 	// 	sTwo=colS2[col-1];
-		 	// else
-		 	// 	break;
-		 	// if((row-1) < rowS1.length)
-		 	// 	sOne=rowS1[row-1];
-		 	// else
-		 	// 	break;
-		 	
-		 	sTwo=colS2[col-1];
-		 	sOne=rowS1[row-1];
-		 	// sTwo=colS2[row-1];
-		 	// sOne=rowS1[col-1];
-		    if(sTwo.equals(sOne)){
-		    	output += "\n\n\nsTwo: "+ sTwo+ " sOne: "+ sOne+ " \nrow: "+row+" col: "+col+" \nrow-1: "+(row-1)+" col-1: "+(col-1)+"\n\n\n\n";
-		        addThis = twoD[row-1][col-1];
-		        twoD[row][col] = addThis+1;
-		    }
-		    else{
-		    	output += "\nsTwo: "+ sTwo+ " sOne: "+ sOne+ " \nrow: "+row+" col: "+col+" \nrow-1: "+(row-1)+" col-1: "+(col-1)+"\n\n";
-		       rowDec = twoD[row-1][col];
-		       colDec = twoD[row][col-1];
-		       max = Math.max(rowDec,colDec);
-		       twoD[row][col] = max;
-		    }
-		 }
+   		 for (int col = 1; col <= colS2.length ; col++ ) {
+   		 	sTwo=colS2[col-1];
+   		 	sOne=rowS1[row-1];
+   		    if(sTwo.equals(sOne)){
+   		        addThis = twoD[row-1][col-1];
+   		        twoD[row][col] = addThis+1;
+   		    }
+   		    else{
+   		       rowDec = twoD[row-1][col];
+   		       colDec = twoD[row][col-1];
+   		       max = Math.max(rowDec,colDec);
+   		       twoD[row][col] = max;
+   		    }
+   		 }
       }
       
       int sub = twoD[rowS1.length][colS2.length]; 
       printArrays(twoD,rowS1,colS2);
-      //System.out.println(output);
-
       System.out.println("Longest sequence is "+ sub);
+      findSusequence(twoD,rowS1.length,colS2.length,colS2);
+   }
 
+   public void findSusequence(int[][] twoD,int row, int col,String[] colS2){
+      int rowDec =0;
+      int colDec =0;
+      String subSequence = "";
+      while(row >= 1 && col >= 1 ){
+         rowDec = twoD[row-1][col];
+         colDec = twoD[row][col-1];
+         if(twoD[row][col-1] == twoD[row-1][col]){
+            subSequence+=colS2[col-1];
+            col--;
+            row--;
+            }
+         else if(colDec == twoD[row][col]){
+            col--;
+         }
+         else{ //if (rowDec == twoD[row][col]){
+            row--;
+         }
+      }
+      String[] subSequenceAr  = subSequence.split("");
+      System.out.println(subSequence);
+      subSequence="";
+      for(int i = subSequenceAr.length - 1; i >=0; i-- ){
+         subSequence+=subSequenceAr[i];
+      }
+      System.out.println(subSequence);
 
    }
 
