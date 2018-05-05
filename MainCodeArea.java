@@ -42,7 +42,8 @@ public class MainCodeArea {
             twoD[i][j] = 0;
          }
       }
-      int addThis = 0;
+      printArrays(twoD,rowS1,colS2);
+      int diagonal = 0;
       int rowDec =0;
       int colDec =0;
       int max = 0;
@@ -53,8 +54,8 @@ public class MainCodeArea {
    		 	sTwo=colS2[col-1];
    		 	sOne=rowS1[row-1];
    		    if(sTwo.equals(sOne)){
-   		        addThis = twoD[row-1][col-1];
-   		        twoD[row][col] = addThis+1;
+   		        diagonal = twoD[row-1][col-1];
+   		        twoD[row][col] = diagonal+1;
    		    }
    		    else{
    		       rowDec = twoD[row-1][col];
@@ -91,7 +92,7 @@ public class MainCodeArea {
          }
       }
       String[] subSequenceAr  = subSequence.split("");
-      System.out.println(subSequence);
+      //System.out.println(subSequence);
       subSequence="";
       for(int i = subSequenceAr.length - 1; i >=0; i-- ){
          subSequence+=subSequenceAr[i];
@@ -103,27 +104,24 @@ public class MainCodeArea {
    public void printArrays(int[][] ar,String[]rowS1,String[]colS2){
       String output ="          ";
       
-      for (int i = 0; i < colS2.length ; i++ ) { 
+      for (int i = 0; i < colS2.length ; i++ )
          output += "| "+colS2[i] +" |";
-
-      }
 
       output += "\n";
 
       for (int row = 0; row <= rowS1.length ; row++ ) { 
          if(row == 0)
-         output += "     ";
+         	output += "     ";
          else if(row <= rowS1.length)
-         output += "| "+rowS1[row-1] +" |";
+         	output += "| "+rowS1[row-1] +" |";
          else
-         output += "     ";
+         	output += "     ";
          for (int col = 0; col <= colS2.length ; col++ ) {
             output += "| "+ar[row][col] +" |";
          }
          output+="\n";
       }
       System.out.println(output);
-
    }
 }
 
